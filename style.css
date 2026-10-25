@@ -81,7 +81,7 @@ a { color: inherit; text-decoration: none; }
 }
 .theme-btn:hover { background: var(--accent); color: #fff; transform: translateY(-2px); }
 
-/* ========== PILL BUTTON (like the screenshot) ========== */
+/* ========== PILL BUTTON ========== */
 .pill-btn {
   display: inline-block;
   font-family: inherit;
@@ -173,6 +173,26 @@ a { color: inherit; text-decoration: none; }
 .post-card .tag { background: rgba(255, 255, 255, 0.2); color: #fff; }
 .post-card .read-more { color: #fbffd6; }
 
+/* Delete button on each card */
+.card-delete {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 3;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1.5px solid rgba(255, 255, 255, 0.6);
+  background: rgba(0, 0, 0, 0.45);
+  color: #fff;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  transition: all 0.2s;
+}
+.card-delete:hover { background: #e5484d; border-color: #e5484d; }
+
 .tag {
   display: inline-block;
   font-size: 0.78rem;
@@ -192,6 +212,28 @@ a { color: inherit; text-decoration: none; }
   transition: transform 0.2s;
 }
 .read-more:hover { transform: translateX(5px); }
+
+/* Empty state + restore button (home page) */
+.empty-msg {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 50px 20px;
+  color: var(--muted);
+  font-size: 1.1rem;
+}
+.restore-wrap { text-align: center; margin-top: 30px; }
+.restore-btn {
+  font-family: inherit;
+  font-weight: 600;
+  padding: 10px 22px;
+  border-radius: 999px;
+  border: 2px solid var(--accent);
+  background: transparent;
+  color: var(--accent);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.restore-btn:hover { background: var(--accent); color: #fff; }
 
 /* ========== FULL-PAGE BACKGROUND (article + new post pages) ========== */
 #bg-layer {

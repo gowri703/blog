@@ -19,6 +19,7 @@ themeBtn.addEventListener('click', function () {
 
 // ================= POSTS DATA =================
 // Built-in posts. Posts you add are stored in localStorage under "posts".
+// Deleted built-in posts are remembered in localStorage under "hiddenSeeds".
 const SEED_POSTS = [
   {
     id: 'seed1',
@@ -86,6 +87,7 @@ const GRADIENTS = [
   'linear-gradient(135deg, #8f2f4a, #2b0d16)'
 ];
 
+// ----- storage helpers -----
 function getUserPosts() {
   try { return JSON.parse(localStorage.getItem('posts') || '[]'); }
   catch (e) { return []; }
@@ -94,13 +96,40 @@ function saveUserPosts(list) {
   try { localStorage.setItem('posts', JSON.stringify(list)); return true; }
   catch (e) { return false; }
 }
+function getHiddenSeeds() {
+  try { return JSON.parse(localStorage.getItem('hiddenSeeds') || '[]'); }
+  catch (e) { return []; }
+}
+function saveHiddenSeeds(list) {
+  try { localStorage.setItem('hiddenSeeds', JSON.stringify(list)); }
+  catch (e) {}
+}
+
+// ----- post helpers -----
 function getAllPosts() {
+  const hidden = getHiddenSeeds();
+  const visibleSeeds = SEED_POSTS.filter(function (p) { return hidden.indexOf(p.id) === -1; });
   // newest user posts first, then the built-in ones
-  return getUserPosts().slice().reverse().concat(SEED_POSTS);
+  return getUserPosts().slice().reverse().concat(visibleSeeds);
 }
 function findPost(id) {
   return getAllPosts().find(function (p) { return p.id === id; });
 }
+function isSeed(id) {
+  return id.indexOf('seed') === 0;
+}
+
+// Deletes a post. Built-in posts are hidden, your own posts are removed for good.
+function deletePost(id) {
+  if (isSeed(id)) {
+    const hidden = getHiddenSeeds();
+    if (hidden.indexOf(id) === -1) hidden.push(id);
+    saveHiddenSeeds(hidden);
+  } else {
+    saveUserPosts(getUserPosts().filter(function (p) { return p.id !== id; }));
+  }
+}
+
 function pickGradient(id) {
   let sum = 0;
   for (let i = 0; i < id.length; i++) sum += id.charCodeAt(i);
@@ -143,12 +172,21 @@ function renderContent(text) {
 
 // ================= HOME PAGE: show cards =================
 const grid = document.getElementById('post-grid');
-if (grid) {
-  getAllPosts().forEach(function (post) {
+
+function renderHome() {
+  grid.innerHTML = '';
+  const posts = getAllPosts();
+
+  if (posts.length === 0) {
+    grid.innerHTML = '<p class="empty-msg">No posts yet. Click "+ New Post" to write one.</p>';
+  }
+
+  posts.forEach(function (post) {
     const card = document.createElement('article');
     card.className = 'post-card';
     card.innerHTML =
       '<div class="bg"></div>' +
+      '<button class="card-delete" aria-label="Delete post">🗑 Delete</button>' +
       '<div class="content">' +
         '<span class="tag">' + esc(post.category) + '</span>' +
         '<h3>' + esc(post.title) + '</h3>' +
@@ -157,9 +195,35 @@ if (grid) {
         '<a class="read-more" href="article.html?id=' + encodeURIComponent(post.id) + '">Read More →</a>' +
       '</div>';
     card.querySelector('.bg').style.backgroundImage = backgroundFor(post);
+
+    card.querySelector('.card-delete').addEventListener('click', function () {
+      if (confirm('Delete "' + post.title + '"?')) {
+        deletePost(post.id);
+        renderHome();
+      }
+    });
+
     grid.appendChild(card);
   });
+
+  // "Restore deleted posts" button (only shows if a built-in post was deleted)
+  const oldRestore = document.getElementById('restore-wrap');
+  if (oldRestore) oldRestore.remove();
+
+  if (getHiddenSeeds().length > 0) {
+    const wrap = document.createElement('div');
+    wrap.id = 'restore-wrap';
+    wrap.className = 'restore-wrap';
+    wrap.innerHTML = '<button class="restore-btn">↺ Restore deleted posts</button>';
+    wrap.querySelector('button').addEventListener('click', function () {
+      saveHiddenSeeds([]);
+      renderHome();
+    });
+    grid.parentNode.appendChild(wrap);
+  }
 }
+
+if (grid) renderHome();
 
 // ================= ARTICLE PAGE: show one post =================
 const postBox = document.getElementById('post-box');
@@ -175,7 +239,6 @@ if (postBox) {
     document.title = post.title + ' | The Daily Byte';
     bgLayer.style.backgroundImage = backgroundFor(post);
 
-    const isUserPost = id.indexOf('seed') !== 0;
     postBox.innerHTML =
       '<span class="tag">' + esc(post.category) + '</span>' +
       '<h1>' + esc(post.title) + '</h1>' +
@@ -183,18 +246,15 @@ if (postBox) {
       renderContent(post.content) +
       '<div class="box-actions">' +
         '<a href="index.html" class="pill-btn">← Back to Home</a>' +
-        (isUserPost ? '<button class="delete-btn" id="delete-btn">Delete Post</button>' : '') +
+        '<button class="delete-btn" id="delete-btn">Delete Post</button>' +
       '</div>';
 
-    const del = document.getElementById('delete-btn');
-    if (del) {
-      del.addEventListener('click', function () {
-        if (confirm('Delete this post?')) {
-          saveUserPosts(getUserPosts().filter(function (p) { return p.id !== id; }));
-          window.location.href = 'index.html';
-        }
-      });
-    }
+    document.getElementById('delete-btn').addEventListener('click', function () {
+      if (confirm('Delete this post?')) {
+        deletePost(id);
+        window.location.href = 'index.html';
+      }
+    });
   }
 }
 
