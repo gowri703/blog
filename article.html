@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Light/Dark Mode Blog | Article</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script>
+    try {
+      if (localStorage.getItem('theme') === 'dark') {
+        document.documentElement.classList.add('dark');
+      }
+    } catch (e) {}
+  </script>
+</head>
+<body>
+
+  <header class="navbar">
+    <a href="index.html" class="logo">✍️ The Daily Byte</a>
+    <nav>
+      <a href="index.html" class="nav-link">← Back</a>
+      <button id="theme-btn" class="theme-btn" aria-label="Toggle dark mode">🌙 Dark Mode</button>
+    </nav>
+  </header>
+
+  <main class="container article-wrap">
+
+    <!-- ========== POST 1 ========== -->
+    <article id="post1" class="article" hidden>
+      <span class="tag">Technology</span>
+      <h1>Why Does Dark Mode Even Exist?</h1>
+      <p class="meta">📅 Oct 20, 2026 &nbsp;•&nbsp; ⏱️ 4 min read &nbsp;•&nbsp; ✍️ The Daily Byte Team</p>
+
+      <p>
+        Open your phone at night and you will probably be greeted by a bright white screen
+        that feels like staring at a torch. That is exactly the problem dark mode tries to solve.
+        But where did it come from, and is it really better?
+      </p>
+
+      <h2>A Quick History</h2>
+      <p>
+        Believe it or not, dark mode is older than light mode. The earliest computer monitors
+        displayed glowing green or white text on a black background, because that was simply how
+        the technology worked. When Windows and Mac introduced paper-like white screens in the
+        1980s, it felt natural for office work, and dark interfaces slowly disappeared. Now they
+        are back, and everyone loves them.
+      </p>
+
+      <h2>Does It Save Battery?</h2>
+      <p>
+        Yes, but only on certain screens. On OLED and AMOLED displays, every pixel makes its own
+        light, so a black pixel is simply switched off. Dark mode can therefore save a good amount
+        of battery on these phones. On older LCD screens, the backlight stays on anyway, so the
+        savings are very small.
+      </p>
+
+      <h2>Is It Better for Your Eyes?</h2>
+      <p>
+        This is where people get confused. Dark mode reduces glare and feels more comfortable in
+        dim rooms, which is why many people read better with it at night. However, in bright
+        daylight, dark text on a light background is usually easier to read. So neither mode is
+        "best" for everyone. It depends on where you are and what you prefer.
+      </p>
+
+      <h2>Quick Tips</h2>
+      <ul>
+        <li>Use dark mode at night or in low-light rooms.</li>
+        <li>Use light mode in bright places like outdoors or a sunny classroom.</li>
+        <li>Take a 20-second break every 20 minutes, whichever mode you use.</li>
+      </ul>
+
+      <h2>Final Thoughts</h2>
+      <p>
+        Dark mode is not magic, but it is a great option to have. The best part is that you
+        control it. Just click the button at the top of this page and see for yourself!
+      </p>
+    </article>
+
+    <!-- ========== POST 2 ========== -->
+    <article id="post2" class="article" hidden>
+      <span class="tag">Student Life</span>
+      <h1>5 Study Habits That Actually Work</h1>
+      <p class="meta">📅 Oct 22, 2026 &nbsp;•&nbsp; ⏱️ 5 min read &nbsp;•&nbsp; ✍️ The Daily Byte Team</p>
+
+      <p>
+        We have all pulled the late-night "read everything again" session before exams, only to
+        forget half of it the next morning. The good news is that learning has a few simple rules.
+        Follow these five habits and you will study smarter, not longer.
+      </p>
+
+      <h2>1. Test Yourself, Don't Just Re-read</h2>
+      <p>
+        Re-reading feels productive, but your brain is just recognizing the words. Close the book
+        and try to write or say what you remember. This is called active recall, and it is one of
+        the strongest ways to build memory.
+      </p>
+
+      <h2>2. Space It Out</h2>
+      <p>
+        Studying one topic for 5 hours in one day is far less effective than studying it for
+        1 hour a day across 5 days. Spaced repetition gives your brain time to store information
+        in long-term memory.
+      </p>
+
+      <h2>3. Teach It to Someone (or Something)</h2>
+      <p>
+        Try explaining a concept to a friend, or even to your wall. If you get stuck, you have
+        just found the part you do not understand yet. Simple analogies help a lot here. For
+        example, think of RAM as your desk and the hard disk as your cupboard.
+      </p>
+
+      <h2>4. Use Short Focus Sessions</h2>
+      <p>
+        Try the Pomodoro method: study for 25 minutes, then take a 5-minute break. After four
+        rounds, take a longer break. Short sprints keep your mind fresh and stop you from
+        zoning out.
+      </p>
+
+      <h2>5. Sleep Is Part of Studying</h2>
+      <p>
+        Your brain organizes what you learned while you sleep. Skipping sleep to study more
+        usually backfires. Aim for a regular sleep schedule, especially in the days before exams.
+      </p>
+
+      <h2>Final Thoughts</h2>
+      <p>
+        You do not need to do everything at once. Pick one habit this week, try it, and see how
+        it feels. Small changes add up fast. All the best for your exams!
+      </p>
+    </article>
+
+    <a href="index.html" class="read-more back-bottom">← Back to Home</a>
+  </main>
+
+  <footer class="footer">
+    <p>© 2026 The Daily Byte • Built with HTML, CSS &amp; JavaScript</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
