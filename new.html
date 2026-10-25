@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Daily Byte | New Post</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script>
+    try {
+      if (localStorage.getItem('theme') === 'dark') {
+        document.documentElement.classList.add('dark');
+      }
+    } catch (e) {}
+  </script>
+</head>
+<body>
+
+  <div id="bg-layer"></div>
+
+  <header class="navbar">
+    <a href="index.html" class="logo">✍️ The Daily Byte</a>
+    <nav>
+      <a href="index.html" class="nav-link">← Back</a>
+      <button id="theme-btn" class="theme-btn" aria-label="Toggle dark mode">🌙 Dark Mode</button>
+    </nav>
+  </header>
+
+  <main class="post-wrap">
+    <section class="post-box">
+      <h1>Write a New Post</h1>
+      <p class="meta">Your post is saved in this browser and shows up on the home page.</p>
+
+      <form id="post-form">
+        <label for="title">Title</label>
+        <input type="text" id="title" placeholder="e.g. My First Hackathon" required>
+
+        <label for="category">Category</label>
+        <input type="text" id="category" placeholder="e.g. Technology" required>
+
+        <label for="summary">Short summary (shown on the home page)</label>
+        <textarea id="summary" rows="3" placeholder="1 or 2 lines about your post" required></textarea>
+
+        <label for="content">Full post</label>
+        <textarea id="content" rows="12" placeholder="Write your post here.&#10;&#10;Leave a blank line to start a new paragraph.&#10;&#10;## Start a line with ## to make a heading&#10;&#10;- Start a line with - to make a bullet" required></textarea>
+
+        <label for="image">Background image (optional)</label>
+        <input type="file" id="image" accept="image/*">
+        <img id="preview" class="preview" alt="Image preview" hidden>
+
+        <button type="submit" class="pill-btn submit-btn">Publish Post</button>
+        <p id="form-msg" class="form-msg"></p>
+      </form>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

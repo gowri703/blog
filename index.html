@@ -3,12 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Light/Dark Mode Blog | Home</title>
+  <title>The Daily Byte | Home</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <!-- Applies saved theme BEFORE the page paints, so there is no white flash -->
   <script>
     try {
       if (localStorage.getItem('theme') === 'dark') {
@@ -23,43 +22,20 @@
     <a href="index.html" class="logo">✍️ The Daily Byte</a>
     <nav>
       <a href="index.html" class="nav-link">Home</a>
+      <a href="new.html" class="nav-link">+ New Post</a>
       <button id="theme-btn" class="theme-btn" aria-label="Toggle dark mode">🌙 Dark Mode</button>
     </nav>
   </header>
 
   <section class="hero">
-    <h1>Thoughts on Tech &amp; Student Life</h1>
-    <p>Short, simple reads for curious minds. Pick a story and dive in.</p>
+    <h1>Hi,<br>Welcome to The Daily Byte.</h1>
+    <p>Short, simple reads on tech and student life.<br>Pick a story, or write your own.</p>
+    <a href="new.html" class="pill-btn">Write a new post</a>
   </section>
 
   <main class="container">
     <h2 class="section-title">Latest Posts</h2>
-
-    <div class="grid">
-      <article class="card">
-        <span class="tag">Technology</span>
-        <h3>Why Does Dark Mode Even Exist?</h3>
-        <p class="meta">📅 Oct 20, 2026 &nbsp;•&nbsp; ⏱️ 4 min read</p>
-        <p>
-          Almost every app now has a dark theme, but is it really better for your eyes?
-          We look at where dark mode came from, how it saves battery on some screens,
-          and when it actually helps you.
-        </p>
-        <a href="article.html?post=1" class="read-more">Read More →</a>
-      </article>
-
-      <article class="card">
-        <span class="tag">Student Life</span>
-        <h3>5 Study Habits That Actually Work</h3>
-        <p class="meta">📅 Oct 22, 2026 &nbsp;•&nbsp; ⏱️ 5 min read</p>
-        <p>
-          Studying for hours does not always mean learning more. Here are five simple,
-          science-backed habits that help you remember more in less time, without
-          burning out before exams.
-        </p>
-        <a href="article.html?post=2" class="read-more">Read More →</a>
-      </article>
-    </div>
+    <div class="grid" id="post-grid"></div>
   </main>
 
   <footer class="footer">
